@@ -7,24 +7,175 @@
 
 /* TODO(ch2-T3): .container — rộng tối đa --container-max, căn giữa (margin-inline: auto),
    padding-inline --space-4, từ 40rem tăng lên --space-6 */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (width >= 40rem) {
+  .container {
+    padding-inline: var(--space-6);
+  }
+}
 
 /* TODO(ch2-T3): .site-header nền --color-header-bg; từ 40rem: position: sticky; top 0.
    .site-header__inner và .site-nav__list dùng Flexbox (flex-wrap: wrap, gap, align-items: center,
    justify-content: space-between); bỏ dấu chấm của list */
+.site-header {
+  background-color: var(--color-header-bg);
+  color: var(--color-header-text);
+  z-index: 100;
+}
+
+.site-header__inner,
+.site-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.site-header__inner {
+  padding-block: var(--space-4);
+}
+
+.site-nav__list {
+  list-style: none;
+}
+
+@media (width >= 40rem) {
+  .site-header {
+    position: sticky;
+    top: 0;
+  }
+}
 
 /* TODO(ch2-T3): .site-footer nền tối, chữ nhỏ; .site-footer__inner cột dọc, từ 64rem thành hàng ngang */
+.site-footer {
+  background-color: var(--palette-blue-900);
+  color: var(--palette-white);
+  font-size: var(--text-sm);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-block: var(--space-6);
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+@media (width >= 64rem) {
+  .site-footer__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
 
 /* TODO(ch2-T3): .page (padding trên dưới), .page--narrow (hẹp lại cho form), .page__intro (tối đa 60ch),
    .section, .section__head (Flexbox: tiêu đề trái, link "Xem tất cả" phải) */
+.page {
+  padding-block: var(--space-8);
+}
+
+.page--narrow {
+  max-width: calc(48rem + var(--space-12));
+}
+
+.page__intro {
+  max-inline-size: 60ch;
+  margin-block-start: var(--space-3);
+}
+
+.section {
+  margin-block-end: var(--space-12);
+}
+
+.section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-block-end: var(--space-6);
+}
 
 /* TODO(ch2-T3): .hero — Grid 1 cột, nền gradient từ primary tới màu tối, chữ trắng, bo góc lớn;
    từ 64rem: grid-template-columns 2 cột */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  margin-block: var(--space-8);
+  padding: var(--space-8) var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  color: var(--palette-white);
+  background: linear-gradient(135deg, var(--color-primary), var(--palette-blue-900));
+}
+
+.hero__media {
+  width: 100%;
+}
+
+@media (width >= 64rem) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    padding: var(--space-12) var(--space-8);
+  }
+}
 
 /* TODO(ch2-T4): .card-grid — display: grid;
    grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr)); gap; bỏ list-style.
    KHÔNG dùng media query cho lưới này. */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: var(--space-6);
+  list-style: none;
+}
 
 /* TODO(ch2-T5): .detail — Grid 1 cột; từ 64rem: 2 cột (2fr và 1fr) với grid-template-areas
      "head head" "media info" "content info" "prep info" "foot foot".
    Gán grid-area cho .detail__head/__media/__info/__content/__prep/__foot CHỈ BÊN TRONG media query.
    .detail__info: align-self: start; position: sticky; top chừa chỗ cho header */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (width >= 64rem) {
+  .detail {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "head head"
+      "media info"
+      "content info"
+      "prep info"
+      "foot foot";
+    align-items: start;
+  }
+
+  .detail__head { grid-area: head; }
+  .detail__media { grid-area: media; }
+  .detail__info { grid-area: info; }
+  .detail__content { grid-area: content; }
+  .detail__prep { grid-area: prep; }
+  .detail__foot { grid-area: foot; }
+
+  .detail__info {
+    position: sticky;
+    top: calc(var(--space-16) + var(--space-4));
+    align-self: start;
+  }
+}
