@@ -1,2 +1,2 @@
+https://kimxoan27.github.io/IN452901-LapTrinhFrontEnd/Chuong02/starter/
 
-https://kimxoan27.github.io/IN452901-LapTrinhFrontEnd/
